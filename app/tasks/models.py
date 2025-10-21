@@ -7,8 +7,8 @@ class TaskModel(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(150), nullable=False)
-    describtion = Column(String(300), nullable=True)
+    description = Column(String(300), nullable=True)
     is_completed = Column(Boolean, default=False)
     
     created_date = Column(DateTime, server_default=func.now())
-    updateed_date= Column(DateTime, server_default=func.now(), server_onupdate=func.now())
+    updated_date= Column(DateTime, server_default=func.now(), server_onupdate=func.now())

@@ -20,7 +20,9 @@ if config.config_file_name is not None:
 # --- Load .env from the parent directory ---
 BASE_DIR = Path(__file__).resolve().parent.parent.parent  # goes up one level from /alembic
 env_path = BASE_DIR / ".env"
+
 load_dotenv(dotenv_path=env_path)
+
 
 # Get the SQLAlchemy URL from the environment variable
 SQLALCHEMY_URL = os.getenv("SQLALCHEMY_DATABASE_URL")
@@ -43,7 +45,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from tasks.models import *
+from tasks.models import TaskModel
 
 target_metadata = Base.metadata
 

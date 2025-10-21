@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from tasks.routes import router as tasks_routes
+from core.database import Base, engine
+
 
 
 tags_metadata = [
@@ -38,5 +40,6 @@ app = FastAPI(
     lifespan=lifespan,
     openapi_tags=tags_metadata
 )
+
 
 app.include_router(tasks_routes) # prefix="/api/v1"

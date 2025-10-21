@@ -20,6 +20,6 @@ class TaskUpdateSchema(TaskBaseSchema):
 class TaskResponseSchema(TaskBaseSchema):
     id: int = Field(..., description="ID")
     
-    create_date: datetime = Field(..., description="Creation date & time")
-    update_date: datetime = Field(..., description="Updating date & time")
+    created_date: datetime = Field(..., description="Creation date & time")
+    updated_date: datetime = Field(..., description="Updating date & time")
 
