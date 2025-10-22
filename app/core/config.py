@@ -1,5 +1,4 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from typing import Annotated
 
 
 class Settings (BaseSettings):
@@ -9,5 +8,8 @@ class Settings (BaseSettings):
 
 settings = Settings()
 
-if not settings.SQLALCHEMY_DATABASE_URL:
+if settings.SQLALCHEMY_DATABASE_URL:
+    print("Model config is down.")
+else:
+    print("❌ Environment variable SQLALCHEMY_DATABASE_URL not set or empty.")
     raise ValueError("❌ Environment variable SQLALCHEMY_DATABASE_URL not set or empty.")
