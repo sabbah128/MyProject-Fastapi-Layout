@@ -1,6 +1,7 @@
 from sqlalchemy import Column, String, Integer, Boolean, func, DateTime, ForeignKey
 from core.database import Base
 from sqlalchemy.orm import relationship
+from users.models import UserModel
 
 
 class TaskModel(Base):
