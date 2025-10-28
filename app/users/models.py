@@ -35,3 +35,7 @@ class UserModel(Base):
 
     def verify_password(self, plain_password: str) -> bool:
         return pwd_context.verify(plain_password, self.password)
+    
+    def set_password(self, plain_text: str) -> None:
+        self.password = self.hash_password(plain_text)
+    
