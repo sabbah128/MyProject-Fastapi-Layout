@@ -46,7 +46,7 @@ app = FastAPI(
 app.include_router(tasks_routes) # prefix="/api/v1"
 app.include_router(users_routes)
 
-from core.auth.basic_auth import get_authenticated_user
+from core.auth.jwt_auth import get_authenticated_user
 
 
 @app.get("/public")
@@ -54,6 +54,6 @@ def public_route():
     return {"msg": "this is a public route"}
 
 @app.get("/private")
-def private_route(user: UserModel = Depends(get_authenticated_user)):
-    print(user)
+def private_route(user = Depends(get_authenticated_user)):
+    print(">>>>>", user.id)
     return {"msg": "this is a private route"}

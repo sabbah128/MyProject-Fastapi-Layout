@@ -3,6 +3,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings (BaseSettings):
     SQLALCHEMY_DATABASE_URL: str = ""
+    JWT_SECRET_KEY: str = "test"
+    ALGORITHM: str = "HS256"
     model_config = SettingsConfigDict(env_file="../.env")
 
 

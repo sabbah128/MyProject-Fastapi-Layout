@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from core.database import get_db
 from typing import List
 from fastapi.responses import JSONResponse
+from core.auth.jwt_auth import generate_access_token, generate_refresh_token
 
 
 router = APIRouter(tags=["users"]) # prefix="/todo"
@@ -18,7 +19,12 @@ async def user_login(request: UserLoginSchema,
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User doesnt exists!")
     if not user_obj.verify_password(request.password):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Password doesnt match!")
-    return {}
+    
+    access_token = generate_access_token(user_obj.id)
+    refresh_token = generate_refresh_token(user_obj.id)
+    return JSONResponse(content={"detail": "Login successfully",
+                                 "access_token": access_token,
+                                 "refresh_token": refresh_token})
 
 
 @router.post("/register")
