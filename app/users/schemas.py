@@ -18,3 +18,6 @@ class UserRegisterSchema(BaseModel):
         if not password_confirm ==validation.data.get("password"):
             raise ValueError("Password doesnt match!")
         return password_confirm
+
+class UserrefreshtokenSchema(BaseModel):
+    token: str = Field(..., description="Refresh token of the user")
