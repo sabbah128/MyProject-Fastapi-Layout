@@ -4,6 +4,8 @@ from tasks.routes import router as tasks_routes
 from users.routes import router as users_routes
 from core.database import Base, engine
 from users.models import UserModel
+from fastapi.middleware.cors import CORSMiddleware
+
 
 
 tags_metadata = [
@@ -47,8 +49,6 @@ app.include_router(tasks_routes) # prefix="/api/v1"
 app.include_router(users_routes)
 
 from core.auth.jwt_auth import get_authenticated_user
-
-
 @app.get("/public")
 def public_route():
     return {"msg": "this is a public route"}
@@ -57,3 +57,27 @@ def public_route():
 def private_route(user = Depends(get_authenticated_user)):
     print(">>>>>", user.id)
     return {"msg": "this is a private route"}
+
+
+
+origins=[
+    "http://127.0.0.1:5500",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# import time
+# from fastapi import FastAPI, Request
+# @app.middleware("http")
+# async def add_process_time_header(request: Request, call_next):
+#     start_time = time.perf_counter()
+#     response = await call_next(request)
+#     process_time = time.perf_counter() - start_time
+#     response.headers["X-Process-Time"] = str(process_time)
+#     return response

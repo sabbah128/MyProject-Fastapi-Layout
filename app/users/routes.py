@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 from core.auth.jwt_auth import generate_access_token, generate_refresh_token, decode_refresh_token
 
 
-router = APIRouter(tags=["users"]) # prefix="/todo"
+router = APIRouter(tags=["users"], prefix="/users")
 
 
 @router.post("/login")
