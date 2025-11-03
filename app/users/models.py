@@ -7,6 +7,7 @@ from datetime import datetime
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+
 class UserModel(Base):
     __tablename__ = "users"
 
@@ -15,7 +16,7 @@ class UserModel(Base):
     # password = Column(String, nullable=False)
 
     # is_active = Column(Boolean, default=True)
-    
+
     # created_date = Column(DateTime, server_default=func.now())
     # updated_date= Column(DateTime, server_default=func.now(), server_onupdate=func.now())
 
@@ -24,9 +25,12 @@ class UserModel(Base):
     password: Mapped[str] = mapped_column(String, nullable=False)
 
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
-    created_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
-    updated_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), server_onupdate=func.now())
-
+    created_date: Mapped[datetime] = mapped_column(
+        DateTime, server_default=func.now()
+    )
+    updated_date: Mapped[datetime] = mapped_column(
+        DateTime, server_default=func.now(), server_onupdate=func.now()
+    )
 
     tasks = relationship("TaskModel", back_populates="user")
 
@@ -35,7 +39,6 @@ class UserModel(Base):
 
     def verify_password(self, plain_password: str) -> bool:
         return pwd_context.verify(plain_password, self.password)
-    
+
     def set_password(self, plain_text: str) -> None:
         self.password = self.hash_password(plain_text)
-    
