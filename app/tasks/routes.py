@@ -1,10 +1,13 @@
 from fastapi import APIRouter, Path, Depends, HTTPException, Query
-from tasks.schemas import *
+from tasks.schemas import (
+    TaskResponseSchema,
+    TaskCreateSchema,
+    TaskUpdateSchema,
+)
 from tasks.models import TaskModel
 from sqlalchemy.orm import Session
 from core.database import get_db
 from typing import List
-from fastapi.responses import JSONResponse
 
 
 router = APIRouter(tags=["tasks"])  # prefix="/todo"

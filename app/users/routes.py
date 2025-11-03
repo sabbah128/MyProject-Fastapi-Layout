@@ -1,9 +1,10 @@
-from fastapi import APIRouter, Path, Depends, HTTPException, Query, status
-from users.schemas import *
+from fastapi import APIRouter, Depends, HTTPException, status
+from users.schemas import UserLoginSchema
+from users.schemas import UserRegisterSchema
+from users.schemas import UserrefreshtokenSchema
 from users.models import UserModel
 from sqlalchemy.orm import Session
 from core.database import get_db
-from typing import List
 from fastapi.responses import JSONResponse
 from core.auth.jwt_auth import (
     generate_access_token,

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Boolean, func, DateTime
+from sqlalchemy import String, Boolean, func, DateTime
 from core.database import Base
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from passlib.context import CryptContext
